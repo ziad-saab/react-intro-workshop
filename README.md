@@ -393,7 +393,9 @@ Then, in the `_handleButtonClick` method, we can refer to the DOM element relate
 
 While the component itself seems stateless on the surface, it's actually refering to a piece of data from the DOM, namely the input box. In the next few exercises, we'll see that sometimes this is not enough and we'll need to create our own state to hold on to extra information that is not -- and should not -- be present in the DOM, as it often is with jQuery.
 
-Once you have implemented your component, test it by importing it in `App.jsx` and add it to your ever-growing list of components :)
+Once you have implemented your component, test it by importing it in `App.jsx` and add it to your ever-growing list of components :) It should look like this (but with the rest of your exercises above it):
+
+![guessing stateless](http://i.imgur.com/c811KE2.gif)
 
 For now, we'll put this exercise on hold to explore a few easy stateful components. Then we'll come back to this and create a complete, stateful number guessing game.
 
