@@ -418,6 +418,10 @@ When you get it working, make your component display the appropriate message (yo
 
 When you get the basics working, add a RESET button to your component. Clicking the reset button should reset the click counter to zero. It should also add 1 to the `timesReset` state, or create it if it doesn't exist. Use the `timesReset` state to display an additional message "You have reset X times". You should only display the additional message if the user has reset at least once.
 
+Here's what your component should look like:
+
+![click counter](http://i.imgur.com/uCS50SC.gif)
+
 ### Stateful component: character counter
 Create a component called `CharacterCounter`. Your component should have a text input, and a character count next to it. Add an `onInput` event handler to the input field, and point it to a method called `_handleInput`. In the `_handleInput` method, you can get the current value of the input field like this:
 
