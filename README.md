@@ -119,7 +119,9 @@ By default, the Babel loader doesn't transform anything. We have to tell it what
 ```
 
 ### Step 7: The getting started code
-To separate the code from our configuration, we'll choose to create an `src` directory at the root of our project, and put all the front-end code in there. All the files described below are to be created in the `src` directory:
+To separate the code from our configuration, we'll choose to create an `src` directory at the root of our project, and put all the front-end code in there.
+
+:warning: :warning: :warning: All the files described below are to be created in the `src` directory:
 
 #### Step 7.1: `index.html`
 Create a file called `index.html` with the following content:
