@@ -484,3 +484,5 @@ In the `render` method, if `this.state.gameStatus` is not defined, simply return
 The next thing you'll want to do is start a new game **when the component gets mounted on the screen**. There happens to be a method that you can implement in your component that will be called exactly as soon as the component gets mounted: `componentDidMount`. If you add this method to your component, React will call it right after your component is displayed on the screen. In this method, you can call `this._startGame()` to make this happen. This will in turn call `setState`, which will re-render your component. At that point the game will start :)
 
 [Here's an example of the game being played](http://imgur.com/no4AE78)
+
+![guessing game](http://i.imgur.com/no4AE78.gif)
