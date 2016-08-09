@@ -471,7 +471,7 @@ They will have 5 tries to guess the number. To guess a number the user must put 
 
 For both the "YOU WIN" and "YOU LOSE" screens, there will be a button labeled "NEW GAME". Pressing this button will reset the game.
 
-When the component gets mounted on the screen, we'll want to start a new game. The display of the game will change as a result of calling `this.setState` at appropriate moments during the [lifecycle of the component](https://facebook.github.io/react/docs/component-specs.html#lifecycle-methods). Here are the different pieces of state we'll need to keep track of:
+When the component gets mounted in the DOM, we'll want to start a new game. The display of the game will change as a result of calling `this.setState` at appropriate moments during the [lifecycle of the component](https://facebook.github.io/react/docs/component-specs.html#lifecycle-methods). Here are the different pieces of state we'll need to keep track of:
 
 ```javascript
 ({
@@ -485,7 +485,7 @@ Since you'll be starting a game from multiple places (initial mounting, and clic
 
 In the `render` method, if `this.state.gameStatus` is not defined, simply return `null`.
 
-The next thing you'll want to do is start a new game **when the component gets mounted on the screen**. There happens to be a method that you can implement in your component that will be called exactly as soon as the component gets mounted: `componentDidMount`. If you add this method to your component, React will call it right after your component is displayed on the screen. In this method, you can call `this._startGame()` to make this happen. This will in turn call `setState`, which will re-render your component. At that point the game will start :)
+The next thing you'll want to do is start a new game **when the component gets mounted in the DOM**. There happens to be a method that you can implement in your component that will be called exactly as soon as the component gets mounted: `componentDidMount`. If you add this method to your component, React will call it right after your component is displayed on the screen. In this method, you can call `this._startGame()` to make this happen. This will in turn call `setState`, which will re-render your component. At that point the game will start :)
 
 Here's an example of the game being played:
 
@@ -544,7 +544,7 @@ Next, we need to make an AJAX call to the GitHub API to retrieve the user info t
 
 It's a simple, flat JavaScript object. The API URL is always the same prefix, and ends with the username. Easy.
 
-The next thing we need to do is find out what's the best place to make our AJAX call. We need to do it as soon as our component instance gets mounted on the screen. What's that I hear? `componentDidMount`! React will call this method as soon as our component has been mounted on the screen.
+The next thing we need to do is find out what's the best place to make our AJAX call. We need to do it as soon as our component instance gets mounted in the DOM. What's that I hear? `componentDidMount`! React will call this method as soon as our component has been mounted in the DOM.
 
 Implement `componentDidMount` for your `GithubProfile` component. In it, use `$.getJSON` to load the appropriate GitHub API URL for the username in your props. In the callback, use `this.setState` to add a `user` object to your state, and set it  to the response of the AJAX call.
 
