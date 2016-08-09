@@ -490,3 +490,78 @@ The next thing you'll want to do is start a new game **when the component gets m
 Here's an example of the game being played:
 
 ![guessing game](http://i.imgur.com/RmIQblR.gif)
+
+### Components and AJAX
+For this exercise, we're going to be doing an AJAX call to the GitHub API to retrieve some information, then build a component that will output this information in a nice way.
+
+The first question is "How do I make AJAX calls with React?" and the answer is, you don't! React is a view library, it deals with user interface components and their interactions.
+
+Loading data with AJAX can be done with *any* library that supports it. In our case, the only library we know to use for making AJAX calls is jQuery. While it's fine to use jQuery alongside React, it's often the case that jQuery is way too big to include if we *only* want to do AJAX calls. Some [other](https://github.com/visionmedia/superagent) [libraries](https://github.com/matthew-andrews/isomorphic-fetch) have been created to only deal with AJAX, but they work in a similar way to jQuery. You make a GET/POST/... to a URL with some parameters, and use a callback or Promise to receive the result.
+
+Let's use jQuery for the moment so that we can concentrate on other things. We'll use jQuery **only to make AJAX calls and receive responses**. First, use NPM to install the `jquery` package in your project. Make sure to `--save` so that the dependency gets added to your `package.json`.
+
+Then, let's create a component called `GithubProfile` in the components directory. You'll mount it in your `<App>` like the rest of your exercises. The `GithubProfile` component will take a prop called `username`, a string that is required. **Make sure to add it to the `propTypes` of your new component!**
+
+Next, in the `GithubProfile` component, implement a `getInitialState` method that returns an empty object. In this component, we're going to use state to let us know when our AJAX call has completed.
+
+Next, we need to make an AJAX call to the GitHub API to retrieve the user info that is in our `this.props.username`. Here's an example of a GitHub API output for a user profile:
+
+`https://api.github.com/users/gaearon`
+```json
+{
+  "login": "gaearon",
+  "id": 810438,
+  "avatar_url": "https://avatars.githubusercontent.com/u/810438?v=3",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/gaearon",
+  "html_url": "https://github.com/gaearon",
+  "followers_url": "https://api.github.com/users/gaearon/followers",
+  "following_url": "https://api.github.com/users/gaearon/following{/other_user}",
+  "gists_url": "https://api.github.com/users/gaearon/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/gaearon/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/gaearon/subscriptions",
+  "organizations_url": "https://api.github.com/users/gaearon/orgs",
+  "repos_url": "https://api.github.com/users/gaearon/repos",
+  "events_url": "https://api.github.com/users/gaearon/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/gaearon/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "Dan Abramov",
+  "company": "Facebook",
+  "blog": "http://twitter.com/dan_abramov",
+  "location": "London, UK",
+  "email": "dan.abramov@me.com",
+  "hireable": null,
+  "bio": "Created: Redux, React Hot Loader, React DnD. Now helping make @reactjs better at @facebook.",
+  "public_repos": 176,
+  "public_gists": 48,
+  "followers": 10331,
+  "following": 171,
+  "created_at": "2011-05-25T18:18:31Z",
+  "updated_at": "2016-07-28T14:41:02Z"
+}
+```
+
+It's a simple, flat JavaScript object. The API URL is always the same prefix, and ends with the username. Easy.
+
+The next thing we need to do is find out what's the best place to make our AJAX call. We need to do it as soon as our component instance gets mounted on the screen. What's that I hear? `componentDidMount`! React will call this method as soon as our component has been mounted on the screen.
+
+Implement `componentDidMount` for your `GithubProfile` component. In it, use `$.getJSON` to load the appropriate GitHub API URL for the username in your props. In the callback, use `this.setState` to add a `user` object to your state, and set it  to the response of the AJAX call.
+
+:warning: **NOTE**: You are going to run into trouble when trying to use `this.setState` inside the callback of your jQuery AJAX call. That's because the callback is a new function and creates a new `this` context, so you lose the `this` that you had access to in the `componentDidMount` outer function. [There are a few different ways to fix it](http://exploringjs.com/es6/ch_arrow-functions.html).
+
+Finally, implement the `render` method for your component. `render` should check if the state contains a `user` object. If it does not, then it should return a `div` with the text "LOADING". If the `user` object is in the state, then your `render` method should return something like this:
+
+```html
+<div class="github-user">
+  <img class="github-user__avatar" src="URL OF THE AVATAR"/>
+  <div class="github-user__info>
+    <p>USERNAME OF THE USER (REAL NAME OF THE USER)</p>
+    <p>BIO OF THE USER IF THERE IS ONE</p>
+  </div>
+</div>
+```
+
+And the end result should look like this in your browser:
+
+![github user](http://i.imgur.com/D2rykuo.png)
