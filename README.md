@@ -639,7 +639,7 @@ Here's an example of it "working":
 
 ![github-search](http://i.imgur.com/J0Vel9g.gif)
 
-:warning: OOPS! What's happening? It seems like our component is working the first time around, but whenever we type a second username, the `GithubUser` component doesn't refresh. If you look at the video closely, you'll notice that the `username` prop of the `GithubUser` component *does* get updated. So why does this not trigger a new AJAX call??
+:warning: **OOPS! What's happening?** It seems like our component is working the first time around, but whenever we type a second username, the `GithubUser` component doesn't refresh. If you look at the video closely, you'll notice that the `username` prop of the `GithubUser` component *does* get updated. So why does this not trigger a new AJAX call??
 
 Let's check our `GithubUser` component. The AJAX call is currently being done in **`componentDidMount`**. Mount. In this case, the component is already mounted in the DOM, the only thing that happened is that its prop has changed. When a component's props change, it doesn't get re-mounted in the DOM. Its current DOM is modified instead, using the result of the latest call to `render`. When this happens, another [React Component lifecycle](https://facebook.github.io/react/docs/component-specs.html) method gets called: [`componentDidUpdate`](https://facebook.github.io/react/docs/component-specs.html#updating-componentdidupdate). If you implement this function you can trigger a new AJAX call if the component gets updated.
 
