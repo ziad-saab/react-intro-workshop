@@ -571,7 +571,7 @@ This exercise is going to expand on the previous one. For this exercise, we're g
 
 At the end of this exercise, your component should look and act like this:
 
-![TODO](URL)
+![github search 2](http://i.imgur.com/Lfmn7Um.gif)
 
 * Step 1: Create a pure `GithubSearchForm` component. Here is the code of it:
 ```javascript
@@ -650,6 +650,6 @@ Here's how to fix your `GithubUser` component:
 3. :warning: Test to make sure things are still working as before!
 4. Implement the `componentDidUpdate` method. In it, check if the `prevProps` username is different from the current props' username. **If and only if they are different**, do another call to `this.fetchData`. Since `fetchData` is using `this.props` to do its job, it will fetch the new user info :)
 
-When you are done, your component should behave like this:
+When you are done, your component should behave like this (**NOTE**: this is the same screencast as in the beginning of this exercise):
 
 ![github search 2](http://i.imgur.com/Lfmn7Um.gif)
