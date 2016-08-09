@@ -442,7 +442,7 @@ You'll receive the DOM event, and you'll get one every time the value of the inp
 
 As always you'll be testing this component by importing it in `App.jsx` and adding it with the rest of the exercises.
 
-### Stateful components and controlled components: character limit
+### Stateful components and [controlled components](https://facebook.github.io/react/docs/forms.html): character limit
 This exercise expands on the previous one. You can copy your current `CharacterCounter` to a new component called `CharacterLimit`, or you can start it from scratch.
 
 The `CharacterLimit` component will accept a prop called `limit`. It should be a number, and is required. Remember to add this prop to the `propTypes` of your component.
@@ -451,7 +451,7 @@ Then, add a `value` prop to the input field. Give it the value of `"hello"` and 
 
 While this seems weird, we'll be able to use this to control the value of the input, but still hook to its `onInput` method to get the next value. We'll then be able to decide if we want to let it through or not.
 
-Here are the steps to create a controlled input component:
+Here are the steps to create a [controlled input component](https://facebook.github.io/react/docs/forms.html):
 
 1. In your `getInitialState` method, keep track of the current input value. We already have a `currentInput` from the previous step. This is where we'll keep the "true" value of the input field.
 2. In your `render` method, give the input field a prop `value` equal to `this.state.currentInput`.
@@ -555,7 +555,7 @@ Finally, implement the `render` method for your component. `render` should check
 ```html
 <div class="github-user">
   <img class="github-user__avatar" src="URL OF THE AVATAR"/>
-  <div class="github-user__info>
+  <div class="github-user__info">
     <p>USERNAME OF THE USER (REAL NAME OF THE USER)</p>
     <p>BIO OF THE USER IF THERE IS ONE</p>
   </div>
@@ -565,3 +565,91 @@ Finally, implement the `render` method for your component. `render` should check
 And the end result should look like this in your browser:
 
 ![github user](http://i.imgur.com/D2rykuo.png)
+
+### Advanced: inter-component communication
+This exercise is going to expand on the previous one. For this exercise, we're going to create two new components, `GithubSearch` and `GithubSearchForm`. We'll use these two components along with the `GithubUser` component from the previous exercise.
+
+At the end of this exercise, your component should look and act like this:
+
+![TODO](URL)
+
+* Step 1: Create a pure `GithubSearchForm` component. Here is the code of it:
+```javascript
+var SearchForm = React.createClass({
+  render: function() {
+    return (
+      <form>
+        <p>Enter a GitHub username:</p>
+        <input type="text" />
+        <button>Go!</button>
+      </form>
+    );
+  }
+});
+```
+
+* Step 2: Create a component called `GithubSearch`. Start with the following code:
+```javascript
+var GithubSearch = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+  render: function() {
+    return (
+      <div>
+        <GithubSearchForm/>
+        {this.state.user ? <GithubUser username={this.state.user}/> : null}
+      </div>
+    );
+  }
+});
+```
+:warning: **Notice that this component is using `GithubSearchForm`. Make sure to import it.**
+
+Let's see what's going on in `GithubSearch`: first off, we're initializing our state to an empty object. This signals that this component will need to be stateful. Then, in `render`, we are outputting a `GithubSearchForm`. This component will manage the user input, and will be aware of when the user clicked on the Go! button.
+
+Our problem is this: *the submit event happens in the `GithubSearchForm` component, but we need to know about this inside the `GithubSearch` parent component*. The two components need to **communicate**.
+
+React's documentation provides a [recipe to follow for splitting up and communicating between components](https://facebook.github.io/react/docs/thinking-in-react.html). In our case, it boils down to adding a method `_handleSearch` in the `GithubSearch` component, and passing this method as a **prop** to `GithubSearchForm`. When the search form detects an input, it will be able to call the method passed down to it, without needing to know where the method came from. Let's implement this slowly:
+
+* Step 3: detect form submission in `GithubSearchForm`
+If we're going to communicate to our parent component that the user want to do a search, we first have to detect the search in the child component.
+
+  1. In the `render` method of `GithubSearchForm`, add a `ref` to the input box and set it to `userInput`.
+  2. Add an `onSubmit` event handler to your `<form>` element, and point it to a method called `_handleSubmit`.
+  3. In _handleSubmit, use `this.refs.userInput.value` to find the value of the input. `console.log` it for now.
+  4. Test your component and note that submitting the form makes the whole page reload! We have to PREVENT the form from submitting. You should know how to do this by now :)
+
+* Step 4: pass a handling function from `GithubSearch`
+In the `GithubSearch` component, add a function called _handleSearch(searchTerm). For now, just `console.log` the value of `searchTerm`. Then, pass a prop called `onSearch` to the `GithubSearchForm` component and make it the `_handleSearch` method you just created:
+
+```javascript
+<GithubSearchForm onSearch={this._handleSearch}/>
+```
+
+* Step 5: accept the `onSearch` prop in your `GithubSearchForm` component
+In `GithubSearchForm`, add a `propType` for `onSearch`, requiring it to be a `React.PropTypes.function`. Then, in the `_handleSubmit` you created in a previous step, instead of using `console.log`, use `this.props.onSearch` and pass it the value of the search form from your refs.
+
+When all this is wired up, you've basically created an **[inverse data flow](https://facebook.github.io/react/docs/thinking-in-react.html#step-5-add-inverse-data-flow)** between your components: a child component is communicating to a parent component using a function that was passed down to it as a prop.
+
+* Step 6: closing the loop
+Now that your `GithubSearch` component is aware of the new search value, modify the `_handleSearch` method. Instead of simply `console.log`ging the value, use `this.setState` to set the value of the `user` state. This will trigger a re-render of your `GithubSearch` component. When it gets re-rendered, `this.state.user` will be set to the value that was in the form. The value will be used by render in the following expression: `{this.state.user ? <GithubUser username={this.state.user}/> : null}`. Since `user` is now set, `render` will output a `GithubUser` component. When this component gets output, its `componentDidMount` function will be called. It will do its AJAX call and output the user box :)
+
+Here's an example of it "working":
+
+![github-search](http://i.imgur.com/J0Vel9g.gif)
+
+:warning: OOPS! What's happening? It seems like our component is working the first time around, but whenever we type a second username, the `GithubUser` component doesn't refresh. If you look at the video closely, you'll notice that the `username` prop of the `GithubUser` component *does* get updated. So why does this not trigger a new AJAX call??
+
+Let's check our `GithubUser` component. The AJAX call is currently being done in **`componentDidMount`**. Mount. In this case, the component is already mounted in the DOM, the only thing that happened is that its prop has changed. When a component's props change, it doesn't get re-mounted in the DOM. Its current DOM is modified instead, using the result of the latest call to `render`. When this happens, another [React Component lifecycle](https://facebook.github.io/react/docs/component-specs.html) method gets called: [`componentDidUpdate`](https://facebook.github.io/react/docs/component-specs.html#updating-componentdidupdate). If you implement this function you can trigger a new AJAX call if the component gets updated.
+
+Here's how to fix your `GithubUser` component:
+
+1. Rename the `componentDidMount` method to `fetchData`
+2. Create a new `componentDidMount` method, and call `this.fetchData` in it
+3. :warning: Test to make sure things are still working as before!
+4. Implement the `componentDidUpdate` method. In it, check if the `prevProps` username is different from the current props' username. **If and only if they are different**, do another call to `this.fetchData`. Since `fetchData` is using `this.props` to do its job, it will fetch the new user info :)
+
+When you are done, your component should behave like this:
+
+![github search 2](http://i.imgur.com/Lfmn7Um.gif)
