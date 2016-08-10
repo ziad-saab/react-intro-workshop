@@ -566,6 +566,8 @@ And the end result should look like this in your browser:
 
 ![github user](http://i.imgur.com/D2rykuo.png)
 
+:warning: **NOTE**: You'll have to add some CSS if you want your output to look like mine ;) Perhaps a `float` and `width`/`height` on that image, `border-radius` to make circular, ...
+
 ### Advanced: inter-component communication
 This exercise is going to expand on the previous one. For this exercise, we're going to create two new components, `GithubSearch` and `GithubSearchForm`. We'll use these two components along with the `GithubUser` component from the previous exercise.
 
