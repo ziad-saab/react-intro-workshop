@@ -630,7 +630,7 @@ In the `GithubSearch` component, add a function called _handleSearch(searchTerm)
 ```
 
 * Step 5: accept the `onSearch` prop in your `GithubSearchForm` component
-In `GithubSearchForm`, add a `propType` for `onSearch`, requiring it to be a `React.PropTypes.function`. Then, in the `_handleSubmit` you created in a previous step, instead of using `console.log`, use `this.props.onSearch` and pass it the value of the search form from your refs.
+In `GithubSearchForm`, add a `propType` for `onSearch`, requiring it to be a `React.PropTypes.func`. Then, in the `_handleSubmit` you created in a previous step, instead of using `console.log`, use `this.props.onSearch` and pass it the value of the search form from your refs.
 
 When all this is wired up, you've basically created an **[inverse data flow](https://facebook.github.io/react/docs/thinking-in-react.html#step-5-add-inverse-data-flow)** between your components: a child component is communicating to a parent component using a function that was passed down to it as a prop.
 
