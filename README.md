@@ -40,6 +40,8 @@ Here is a quick look at what each dependency does:
     This library takes the output from React -- a tree of components -- and makes efficient calls to the DOM in order to reflect the tree of components.
   * `webpack`:
     A command-line tool that can bundle code and files for efficient serving over the web. It understands the `require` function calls in our code, figures out all the files we need and puts them all together in one big js file. We'll be running Webpack in "watch mode", meaning it will re-bundle our application every time we make a change. It's pretty fast.
+  * `babel-core`:
+    This contains the core file transformation functionality of babel. It's the logic that knows to look at the `.babelrc` file and decide which plugins to load, and then transforms the input file using those plugins.
   * `babel-loader`:
     Webpack by itself doesn't do any transformation on our files, simply puts them together. By using loaders, Webpack is able to understand all sorts of syntaxes and file formats. The babel loader lets us load JavaScript code that contains newer features or syntax. It uses its own presets to transform our code. The presets we are using are described below.
   * `babel-preset-es2015`:
