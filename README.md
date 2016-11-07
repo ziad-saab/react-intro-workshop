@@ -26,7 +26,7 @@ From a terminal window, run `npm init`. This will create your initial `package.j
 From a terminal window, run the following command to install the base dependencies:
 
 ```sh
-npm install --save express react react-dom webpack babel-loader babel-preset-es2015 babel-preset-react
+npm install --save express react react-dom webpack babel-core babel-loader babel-preset-es2015 babel-preset-react
 ```
 
 Here is a quick look at what each dependency does:
