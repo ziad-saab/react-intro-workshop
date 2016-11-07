@@ -1,5 +1,8 @@
 # Intro to React workshop
 
+## Resources
+In addition to the material we saw in class, the [ReactJS Basics by Mindspace](https://www.youtube.com/watch?v=JPT3bFIwJYA&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS) is a great introductory video series on the subject of React. At any point during this workshop, feel free to pause and take a look at it.
+
 ## Creating the initial environment
 In this section, we are going to re-create the initial environment required to successfully develop and run a React application.
 
