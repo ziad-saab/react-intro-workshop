@@ -512,9 +512,7 @@ For this exercise, we're going to be doing an AJAX call to the GitHub API to ret
 
 The first question is "How do I make AJAX calls with React?" and the answer is, you don't! React is a view library, it deals with user interface components and their interactions.
 
-Loading data with AJAX can be done with *any* library that supports it. In our case, the only library we know to use for making AJAX calls is jQuery. While it's fine to use jQuery alongside React, it's often the case that jQuery is way too big to include if we *only* want to do AJAX calls. Some [other](https://github.com/visionmedia/superagent) [libraries](https://github.com/matthew-andrews/isomorphic-fetch) have been created to only deal with AJAX, but they work in a similar way to jQuery. You make a GET/POST/... to a URL with some parameters, and use a callback or Promise to receive the result.
-
-Let's use jQuery for the moment so that we can concentrate on other things. We'll use jQuery **only to make AJAX calls and receive responses**. First, use NPM to install the `jquery` package in your project. Make sure to `--save` so that the dependency gets added to your `package.json`.
+Loading data with AJAX can be done with *any* library that supports it, or with Vanilla JS. In our case, the easiest way will be using the modern `fetch` function. If we want our app to be supported in older browsers, we can [polyfill `fetch`](https://github.com/github/fetch).
 
 Then, let's create a component called `GithubProfile` in the components directory. You'll mount it in your `<App>` like the rest of your exercises. The `GithubProfile` component will take a prop called `username`, a string that is required. **Make sure to add it to the `propTypes` of your new component!**
 
@@ -564,7 +562,7 @@ The next thing we need to do is find out what's the best place to make our AJAX 
 
 Implement `componentDidMount` for your `GithubProfile` component. In it, use `$.getJSON` to load the appropriate GitHub API URL for the username in your props. In the callback, use `this.setState` to add a `user` object to your state, and set it  to the response of the AJAX call.
 
-:warning: **NOTE**: You are going to run into trouble when trying to use `this.setState` inside the callback of your jQuery AJAX call. That's because the callback is a new function and creates a new `this` context, so you lose the `this` that you had access to in the `componentDidMount` outer function. [There are a few different ways to fix it](http://exploringjs.com/es6/ch_arrow-functions.html).
+:warning: **NOTE**: You are going to run into trouble when trying to use `this.setState` inside the success callback of your fetch AJAX call. That's because the callback is a new function and creates a new `this` context, so you lose the `this` that you had access to in the `componentDidMount` outer function. [There are a few different ways to fix it](http://exploringjs.com/es6/ch_arrow-functions.html).
 
 Finally, implement the `render` method for your component. `render` should check if the state contains a `user` object. If it does not, then it should return a `div` with the text "LOADING". If the `user` object is in the state, then your `render` method should return something like this:
 
@@ -585,7 +583,7 @@ And the end result should look like this in your browser:
 :warning: **NOTE**: You'll have to add some CSS if you want your output to look like mine ;) Perhaps a `float` and `width`/`height` on that image, `border-radius` to make circular, ...
 
 ### Advanced: inter-component communication
-This exercise is going to expand on the previous one. For this exercise, we're going to create two new components, `GithubSearch` and `GithubSearchForm`. We'll use these two components along with the `GithubUser` component from the previous exercise.
+This exercise is going to expand on the previous one. For this exercise, we're going to create two new components, `GithubSearch` and `GithubSearchForm`. We'll use these two components along with the `GithubProfile` component from the previous exercise.
 
 At the end of this exercise, your component should look and act like this:
 
