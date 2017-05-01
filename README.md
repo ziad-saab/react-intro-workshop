@@ -265,7 +265,7 @@ As always you'll be testing this component by importing it in `App.js` and addin
 ### Stateful components and [controlled components](https://facebook.github.io/react/docs/forms.html): character limit
 This exercise expands on the previous one. You can copy your current `CharacterCounter` to a new component called `CharacterLimit`, or you can start it from scratch.
 
-The `CharacterLimit` component will accept a prop called `limit`. It should be a number, and is required. Remember to add this prop to the `propTypes` of your component.
+The `CharacterLimit` component will accept a prop called `limit`. It should be a number, and is required.
 
 Then, add a `value` prop to the input field. Give it the value of `"hello"` and view your component in the browser. Notice that React gives you a warning about a read-only field? Since the `render` method gives a constant value to the `value` property, the value cannot change.
 
@@ -318,7 +318,7 @@ The first question is "How do I make AJAX calls with React?" and the answer is, 
 
 Loading data with AJAX can be done with *any* library that supports it, or with Vanilla JS. In our case, the easiest way will be using the modern `fetch` function. If we want our app to be supported in older browsers, we can [polyfill `fetch`](https://github.com/github/fetch).
 
-Then, let's create a component called `GithubProfile` in the components directory. You'll mount it in your `<App>` like the rest of your exercises. The `GithubProfile` component will take a prop called `username`, a string that is required. **Make sure to add it to the `propTypes` of your new component!**
+Then, let's create a component called `GithubProfile` in the components directory. You'll mount it in your `<App>` like the rest of your exercises. The `GithubProfile` component will take a prop called `username`, a string that is required.
 
 Next, in the `GithubProfile` component, implement a `constructor` method that assigns an empty object to `this.state`. In this component, we're going to use state to let us know when our AJAX call has completed.
 
@@ -453,7 +453,7 @@ In the `GithubSearch` component, add a function called _handleSearch(searchTerm)
 ```
 
 * Step 5: accept the `onSearch` prop in your `GithubSearchForm` component
-In `GithubSearchForm`, add a `propType` for `onSearch`, requiring it to be a `React.PropTypes.func`. Then, in the `_handleSubmit` you created in a previous step, instead of using `console.log`, use `this.props.onSearch` and pass it the value of the search form from your refs.
+In the `_handleSubmit` of the `GithubSearchForm` component you created in a previous step, instead of using `console.log`, use `this.props.onSearch` and pass it the value of the search form from your refs.
 
 When all this is wired up, you've basically created an **[inverse data flow](https://facebook.github.io/react/docs/thinking-in-react.html#step-5-add-inverse-data-flow)** between your components: a child component is communicating to a parent component using a function that was passed down to it as a prop.
 
