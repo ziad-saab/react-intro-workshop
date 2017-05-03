@@ -413,6 +413,8 @@ class SearchForm extends React.Component {
 * Step 2: Create a component called `GithubSearch`. Start with the following code:
 ```javascript
 import React from 'react';
+import GithubProfile from './GithubProfile';
+import GithubSearchForm from './GithubSearchForm';
 
 class GithubSearch extends React.Component {
   constructor() {
@@ -423,7 +425,7 @@ class GithubSearch extends React.Component {
     return (
       <div>
         <GithubSearchForm/>
-        {this.state.user ? <GithubUser username={this.state.user}/> : null}
+        {this.state.user ? <GithubProfile username={this.state.user}/> : null}
       </div>
     );
   }
@@ -458,17 +460,17 @@ In the `_handleSubmit` of the `GithubSearchForm` component you created in a prev
 When all this is wired up, you've basically created an **[inverse data flow](https://facebook.github.io/react/docs/thinking-in-react.html#step-5-add-inverse-data-flow)** between your components: a child component is communicating to a parent component using a function that was passed down to it as a prop.
 
 * Step 6: closing the loop
-Now that your `GithubSearch` component is aware of the new search value, modify the `_handleSearch` method. Instead of simply `console.log`ging the value, use `this.setState` to set the value of the `user` state. This will trigger a re-render of your `GithubSearch` component. When it gets re-rendered, `this.state.user` will be set to the value that was in the form. The value will be used by render in the following expression: `{this.state.user ? <GithubUser username={this.state.user}/> : null}`. Since `user` is now set, `render` will output a `GithubUser` component. When this component gets output, its `componentDidMount` function will be called. It will do its AJAX call and output the user box :)
+Now that your `GithubSearch` component is aware of the new search value, modify the `_handleSearch` method. Instead of simply `console.log`ging the value, use `this.setState` to set the value of the `user` state. This will trigger a re-render of your `GithubSearch` component. When it gets re-rendered, `this.state.user` will be set to the value that was in the form. The value will be used by render in the following expression: `{this.state.user ? <GithubProfile username={this.state.user}/> : null}`. Since `user` is now set, `render` will output a `GithubProfile` component. When this component gets output, its `componentDidMount` function will be called. It will do its AJAX call and output the user box :)
 
 Here's an example of it "working":
 
 ![github-search](http://i.imgur.com/J0Vel9g.gif)
 
-:warning: **OOPS! What's happening?** It seems like our component is working the first time around, but whenever we type a second username, the `GithubUser` component doesn't refresh. If you look at the video closely, you'll notice that the `username` prop of the `GithubUser` component *does* get updated. So why does this not trigger a new AJAX call??
+:warning: **OOPS! What's happening?** It seems like our component is working the first time around, but whenever we type a second username, the `GithubProfile` component doesn't refresh. If you look at the video closely, you'll notice that the `username` prop of the `GithubProfile` component *does* get updated. So why does this not trigger a new AJAX call??
 
-Let's check our `GithubUser` component. The AJAX call is currently being done in **`componentDidMount`**. Mount. In this case, the component is already mounted in the DOM, the only thing that happened is that its prop has changed. When a component's props change, it doesn't get re-mounted in the DOM. Its current DOM is modified instead, using the result of the latest call to `render`. When this happens, another [React Component lifecycle](https://facebook.github.io/react/docs/component-specs.html) method gets called: [`componentDidUpdate`](https://facebook.github.io/react/docs/component-specs.html#updating-componentdidupdate). If you implement this function you can trigger a new AJAX call if the component gets updated.
+Let's check our `GithubProfile` component. The AJAX call is currently being done in **`componentDidMount`**. Mount. In this case, the component is already mounted in the DOM, the only thing that happened is that its prop has changed. When a component's props change, it doesn't get re-mounted in the DOM. Its current DOM is modified instead, using the result of the latest call to `render`. When this happens, another [React Component lifecycle](https://facebook.github.io/react/docs/component-specs.html) method gets called: [`componentDidUpdate`](https://facebook.github.io/react/docs/component-specs.html#updating-componentdidupdate). If you implement this function you can trigger a new AJAX call if the component gets updated.
 
-Here's how to fix your `GithubUser` component:
+Here's how to fix your `GithubProfile` component:
 
 1. Rename the `componentDidMount` method to `fetchData`
 2. Create a new `componentDidMount` method, and call `this.fetchData` in it
