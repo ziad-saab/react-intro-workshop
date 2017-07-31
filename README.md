@@ -69,7 +69,7 @@ Your component should output a [`figure`](http://html5doctor.com/the-figure-figc
 </figure>
 ```
 
-Once you have completed your `render` method, go to your `App.js`. Use `import` to import your `ImageCaption` component. Then, in the `render` method of `App`, after the `<hr/>`, add an `<h2>` that says "testing ImageCaption", and use `<ImageCaption>` to output the following image http://i.imgur.com/D8JWn.jpg with an appropriate caption. End it all with another `<hr/>` to create a spacing for the next exercise.
+Once you have completed your `render` method, go to your `App.js`. Use `import` to import your `ImageCaption` component. Then, in the `render` method of `App`, after the content that's already there, add an `<h2>` that says "testing ImageCaption", and use `<ImageCaption>` to output the following image http://i.imgur.com/D8JWn.jpg with an appropriate caption. End it all with an `<hr/>` to create a spacing for the next exercise.
 
 ### Lists of items
 For this exercise, we will use the same `ImageCaption` component to render a list of images with captions. The data will come from an array of objects, something that you should be quite familiar with by now. Data often comes in as arrays of objects, and applications often display lists of things.
