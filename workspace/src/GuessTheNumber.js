@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 class GuessTheNumber extends React.Component {
 
-    _handleButtonClick() {
+    _handleButtonClick(event) {
+
+        event.preventDefault();
+
         var guess = parseInt(this.refs.userGuess.value, 10); //2nd param is radix (decimal num)
         if (guess === this.props.number) {
             alert("Correct!");
@@ -18,10 +21,10 @@ class GuessTheNumber extends React.Component {
 
     render(){
         return (
-            <div>
+            <form onSubmit={this._handleButtonClick.bind(this)}>
                 <input type="text" ref="userGuess"/>
-                <button onClick={this._handleButtonClick.bind(this)}> Guess </button>
-            </div>
+                <button > Guess </button>
+            </form>
         );
     }
 }

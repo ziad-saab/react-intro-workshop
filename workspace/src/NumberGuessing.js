@@ -1,4 +1,4 @@
-import React from 'react'; //TODO: Ask Ziad if this is proper design (to have a render message for each condition)
+import React from 'react'; //TODO: Ask Ziad if this is proper design (to have a render message for each condition) => Ternary operator tree or a function are both acceptable!
 
 class NumberGuessing extends React.Component {
 
@@ -40,7 +40,7 @@ class NumberGuessing extends React.Component {
                 guesses : this.state.guesses.concat([userTry]),
                 gameStatus : "win"
             });
-        } //TODO: Ask Ziad or Mathieu: Does the rendering (life cycle) of a component happen in the middle of a function or after its execution?!
+        } //TODO: Ask Ziad or Mathieu: Does the rendering (life cycle) of a component happen in the middle of a function or after its execution?! Answer: After it's execution, we could have a million setStates but only one re-render
 
         this._checkLoss();
     }
@@ -60,10 +60,11 @@ class NumberGuessing extends React.Component {
             );
         }
         else if (this.state.gameStatus === "playing" && this.state.guesses.length > 0){
+            /* the map simply spaces out the array nicely on the UI */
             return (
                 <div>
                     <h4>Guess between 1 and 100</h4>
-                    <h4>Your guesses: {this.state.guesses.map( (arrayItem) => arrayItem + ", " )} </h4> /* This simply spaces out the array nicely on the UI */
+                    <h4>Your guesses: {this.state.guesses.map( (arrayItem) => arrayItem + ", " )} </h4>
                     <h4>{ (this.state.guesses[this.state.guesses.length - 1] < this.state.numberToGuess) ? "Too low" : "Too high" }</h4>
                     <input type="text" ref="userGuess"/>
                     <button onClick={this._handleButtonClick.bind(this)}> Guess Num! </button>
@@ -89,7 +90,7 @@ class NumberGuessing extends React.Component {
     }
 
     render() {
-        if (this.state.gameStatus === undefined) { //TODO: undefined or !this.state.gameStatus
+        if (this.state.gameStatus === undefined) {
             return null;
         }
         return (

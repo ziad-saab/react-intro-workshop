@@ -9,14 +9,43 @@ import YouClicked from "./YouClicked";
 import CharacterCounter from "./CharacterCounter";
 import CharacterLimit from "./CharacterLimit";
 import NumberGuessing from "./NumberGuessing";
+import DoesNotNeedToBeSameClassName from "./ImageCaptionZiadAnswer";
+import RedBoxZiad from "./RedBoxZiad";
+import GuessTheNumberZiad from "./GuessTheNumberZiad";
+import YouClickedZiad from "./YouClickedZiad";
+import SpaceStation from "./SpaceStation";
+import Timer from "./Timer";
+import MyInput from "./MyInput";
+import GithubProfile from "./GithubProfile";
+import GithubSearch from "./GithubSearch";
 
-var imageList = [
+var imageList = [ //unique keys are necessary for sorting and accessing specific indexes of the array instead of re-rendering the whole thing (saves bandwidth and processing power)
     {id: 42, source: "http://placekitten.com/g/210/210", text: "Hello kittenz!"},
     {id: 43, source: "https://facebook.github.io/react/img/logo.svg", text: "React Logo"},
     {id: 44, source: "https://media.giphy.com/media/EldfH1VJdbrwY/giphy.gif", text: "Mind Blown!"}
-];
+]; //Could use another global variable array to be mapped and pass it below, but usually does not appear in real-code.
+
+React.createElement(SpaceStation); //NOTE: THIS WILL CREATE THE VIRTUAL DOM OBJECT BUT NOT MOUNT THE DOM
+
+//If we not given IDs, we would probably manually add them.
+// imageList.forEach(function(img, idx){
+//    img.id = idx;
+// });
 
 class App extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            showTimer: true
+        };
+    }
+
+    componentDidMount(){
+        setTimeout(()=>{
+            this.setState( {showTimer: false} );
+        }, 5000);
+    }
 
     renderImage(imageObj) {
         return (
@@ -42,11 +71,29 @@ class App extends Component {
                     {imageList.map(this.renderImage)}
                 </div>
                 <hr/>
+                <h2>
+                    Ziad's imagecaption
+                </h2>
+                <DoesNotNeedToBeSameClassName source="http://placekitten.com/g/210/210" text="Ziad's Kitten"/>
+                <hr/>
+                <h2>Ziads RedBox</h2>
+                <RedBoxZiad text="Hello World!11!!">
+                    <ul>
+                        <li> HELLO WORLD! </li>
+                        <li> PROPS CHILDREN RULE!11! </li>
+                    </ul>
+                </RedBoxZiad>
+                <hr/>
                 <h2>RedBox</h2>
                 <RedBox>
                     <p>This will be in the red box</p>
                     <img alt="This too!" src="http://placekitten.com/g/200/200"/>
                 </RedBox>
+                <hr/>
+                <h2>
+                    Ziad's Guess Number
+                </h2>
+                <GuessTheNumberZiad/>
                 <hr/>
                 <h2>Testing Layout</h2>
                 <Layout>
@@ -60,6 +107,9 @@ class App extends Component {
                 <h2>Click button states</h2>
                 <YouClicked/>
                 <hr/>
+                <h2>Ziad's You clicked</h2>
+                <YouClickedZiad/>
+                <hr/>
                 <h2>Character Counter</h2>
                 <CharacterCounter/>
                 <hr/>
@@ -69,6 +119,22 @@ class App extends Component {
                 <h2>Number guessing game</h2>
                 <NumberGuessing/>
                 <hr/>
+                <h2>Spacestation FETCH</h2>
+                <SpaceStation/>
+                <hr/>
+                <h2>Timer</h2>
+                {this.state.showTimer ? <Timer/> : null}
+                <hr/>
+                <h2>Ziad Input Example</h2>
+                <RedBox>
+                    <MyInput/>
+                </RedBox>
+                <hr/>
+                <h2>Github API</h2>
+                <GithubProfile username="denysdovhan"/>
+                <hr/>
+                <h2>Github Search</h2>
+                <GithubSearch/>
             </div>
         );
     }
