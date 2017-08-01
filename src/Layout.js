@@ -5,7 +5,7 @@ class Layout extends React.Component {
         return (
             <div className="layout">
                 <nav className="main-nav">
-                    <ul>
+                    <ul style={ulStyle}>
                       <li><a href="/">Home</a></li>
                     </ul>
                 </nav>
@@ -19,5 +19,11 @@ class Layout extends React.Component {
         );
     }
 }
+
+var ulStyle = {
+    listStyle: "none",
+    margin: 0,
+    padding: 0
+};
 
 export default Layout;

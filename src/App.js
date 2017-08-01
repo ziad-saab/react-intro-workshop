@@ -18,12 +18,17 @@ var imageList = [
 ];
 
 class App extends Component {
-  renderImage(map) {
-    let imageList = map.map(item => {
-      return <ImageCaption key={item.id} source={item.source} text={item.text} />;
-    });
+  // renderImage(map) {
+  //   let imageList = map.map(item => {
+  //     return <ImageCaption key={item.id} source={item.source} text={item.text} />;
+  //   });
     
-    return (imageList);
+  //   return (imageList);
+  // }
+  // Was used in app: {this.renderImage(imageList)}
+  
+  renderImage(img) {
+    return <ImageCaption key={img.id} source={img.source} text={img.text} />;
   }
   
   render() {
@@ -41,19 +46,22 @@ class App extends Component {
         <ImageCaption source="http://i.imgur.com/D8JWn.jpg" text="Rainbow-tailed cat" />
         <hr />
           <div>
-            {this.renderImage(imageList)}
+            {imageList.map(this.renderImage)}
           </div>
-        <div>
-          <h2>Testing Layout</h2>
-          <Layout>
-            <h2>About Us</h2>
-            <p>We are <a href='https://facebook.github.io/react'>React</a> developers!</p>
-          </Layout>
-        </div>
+        <hr />
+          <div>
+            <h2>Testing Layout</h2>
+            <Layout>
+              <h2>About Us</h2>
+              <p>We are <a href='https://facebook.github.io/react'>React</a> developers!</p>
+            </Layout>
+          </div>
+        <hr />
         <div>
           <h2>Testing GuessTheNumber (1-100)</h2>
           <GuessTheNumber numberToGuess='42' />
         </div>
+        <hr />
           <h2>Testing YouClicked</h2>
           <YouClicked />
         <hr />
