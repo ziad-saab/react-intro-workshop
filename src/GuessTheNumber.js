@@ -1,9 +1,9 @@
 import React from 'react';
 
 class GuessTheNumber extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     
     _handleButtonClick(event) {
         //event.preventDefault();

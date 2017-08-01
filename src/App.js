@@ -8,6 +8,7 @@ import YouClicked from './YouClicked.js';
 import CharacterCounter from './CharacterCounter';
 import CharacterLimit from './CharacterLimit';
 import NumberGuessing from './NumberGuessing.js';
+import GithubProfile from './GithubProfile.js';
 
 var imageList = [
   {id: 42, source: "http://placekitten.com/g/210/210", text: "Hello kittenz!"},
@@ -63,6 +64,12 @@ class App extends Component {
         <hr />
           <h2>Testing NumberGuessing</h2>
           <NumberGuessing />
+        <hr />
+          <div>
+            <h2>Testing GithubProfile</h2>
+            <GithubProfile username="ziad-saab" />
+          </div>
+        <hr />
       </div>
     );
   }
