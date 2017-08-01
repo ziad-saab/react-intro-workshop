@@ -364,7 +364,7 @@ It's a simple, flat JavaScript object. The API URL is always the same prefix, an
 
 The next thing we need to do is find out what's the best place to make our AJAX call. We need to do it as soon as our component instance gets mounted in the DOM. What's that I hear? `componentDidMount`! React will call this method as soon as our component has been mounted in the DOM.
 
-Implement `componentDidMount` for your `GithubProfile` component. In it, use `$.getJSON` to load the appropriate GitHub API URL for the username in your props. In the callback, use `this.setState` to add a `user` object to your state, and set it  to the response of the AJAX call.
+Implement `componentDidMount` for your `GithubProfile` component. In it, use `fetch` to load the appropriate GitHub API URL for the username in your props. In the callback, use `this.setState` to add a `user` object to your state, and set it  to the response of the AJAX call.
 
 :warning: **NOTE**: You are going to run into trouble when trying to use `this.setState` inside the success callback of your fetch AJAX call. That's because the callback is a new function and creates a new `this` context, so you lose the `this` that you had access to in the `componentDidMount` outer function. [There are a few different ways to fix it](http://exploringjs.com/es6/ch_arrow-functions.html). Use `bind` if you are comfortable with it, or `var that = this` otherwise.
 
