@@ -9,6 +9,7 @@ import CharacterCounter from './CharacterCounter';
 import CharacterLimit from './CharacterLimit';
 import NumberGuessing from './NumberGuessing.js';
 import GithubProfile from './GithubProfile.js';
+import GithubSearch from './GithubSearch.js';
 
 var imageList = [
   {id: 42, source: "http://placekitten.com/g/210/210", text: "Hello kittenz!"},
@@ -68,6 +69,11 @@ class App extends Component {
           <div>
             <h2>Testing GithubProfile</h2>
             <GithubProfile username="ziad-saab" />
+          </div>
+        <hr />
+          <div>
+            <h2>Testing GithubSearch</h2>
+            <GithubSearch />
           </div>
         <hr />
       </div>

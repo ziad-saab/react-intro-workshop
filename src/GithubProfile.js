@@ -11,9 +11,9 @@ class GithubProfile extends React.Component {
         };
     }
     
-    componentDidMount() {
+    fetchData() {
         let GITHUB_API_URL = 'https://api.github.com/users/';
-        //console.log(`${GITHUB_API_URL}${this.props.username}`); //Test
+        console.log(`Fetching! = ${GITHUB_API_URL}${this.props.username}`); //Test
         fetch(`${GITHUB_API_URL}${this.props.username}`)
         .then (r => r.json())
         .then (data => {
@@ -26,6 +26,19 @@ class GithubProfile extends React.Component {
         });
     }
     
+    componentDidMount(){
+        this.fetchData();
+    }
+    
+    componentDidUpdate(prevProps, prevState){
+        //event.preventDefault();
+        
+        //console.log(`Component updated previous=${prevProps} current=${this.props}`); //Test
+        if (prevProps.username !== this.props.username) {
+            this.fetchData();
+        }
+    }
+    
     render(){
         return (
             <div className="github-user" style={githubUserStyle}>
@@ -35,7 +48,7 @@ class GithubProfile extends React.Component {
                     style={imgStyle}
                 />
                 <div className="github-user__info">
-                    <p>{this.state.username} ({this.state.name})</p>
+                    <p>{this.props.username} ({this.state.name})</p>
                     <p>{this.state.bio}</p>
                 </div>
             </div>
