@@ -13,8 +13,9 @@ class GithubProfile extends React.Component {
     
     fetchData() {
         let GITHUB_API_URL = 'https://api.github.com/users/';
+        let GITHUB_API_TOKEN = 'db627e327d938e3f3bde5e56c6dbfa161a75080f';
         console.log(`Fetching! = ${GITHUB_API_URL}${this.props.username}`); //Test
-        fetch(`${GITHUB_API_URL}${this.props.username}`)
+        fetch(`${GITHUB_API_URL}${this.props.username}?access_token=${GITHUB_API_TOKEN}`)
         .then (r => r.json())
         .then (data => {
             //console.log(data); //Test

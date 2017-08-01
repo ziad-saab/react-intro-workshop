@@ -31,9 +31,10 @@ class YouClicked extends React.Component {
                     this.state.timesClicked === 1? "You have clicked the button once" :
                     this.state.timesClicked === 2? "You have clicked the button twice" : "You have clicked the button " + this.state.timesClicked + " times."
                 }</p>
-                <p>{
-                    this.state.timesReset === 0? "" : "You have reset " + this.state.timesReset + " times."
-                }</p>
+                {
+                    this.state.timesReset === 0? null : 
+                    <p>`You have reset {this.state.timesReset} times.`</p>
+                }
             </div>
         );
     }

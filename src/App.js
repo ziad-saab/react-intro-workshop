@@ -76,7 +76,7 @@ class App extends Component {
         <hr />
           <div>
             <h2>Testing GithubProfile</h2>
-            <GithubProfile username="ziad-saab" />
+            <GithubProfile username="tsirrus" />
           </div>
         <hr />
           <div>
