@@ -29,7 +29,7 @@ class NumberGuessing extends React.Component {
         console.log(Number(this.refs.userGuess.value));
         
         let currentGuesses = this.state.guesses;
-        currentGuesses.push(this.refs.userGuess.value)
+        currentGuesses.push(this.refs.userGuess.value);
         
         if(Number(this.refs.userGuess.value) === this.state.numberToGuess){
             this.setState({
@@ -38,9 +38,12 @@ class NumberGuessing extends React.Component {
                 guesses: currentGuesses
             });
         }
+        
         else if (Number(this.refs.userGuess.value) < this.state.numberToGuess){
+            //this setState should need a guesses: currentguesses
+            //But it still works, find out WHY it works
             this.setState({guessString:"TOO LOW :( !!"});
-            if(+this.state.guesses.length >= 5){
+            if(this.state.guesses.length >= 5){
                 this.setState({
                     gameStatus: "lose", 
                     guessString: "YOU LOSE :(!!",
@@ -50,7 +53,7 @@ class NumberGuessing extends React.Component {
         }
         else {
             this.setState({guessString:"TOO HIGH :( !!"});
-            if(+this.state.guesses.length >= 5){
+            if(this.state.guesses.length >= 5){
                 this.setState({
                     gameStatus: "lose", 
                     guessString: "YOU LOSE :(!!",
@@ -115,7 +118,6 @@ export default NumberGuessing;
     In this method, you can call this._startGame() to make this happen. 
     This will in turn call setState, which will re-render your component. 
     At that point the game will start :)
-    
 */
 
 

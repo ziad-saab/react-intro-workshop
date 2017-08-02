@@ -7,6 +7,8 @@ import GuessTheNumber from './GuessTheNumber.js';
 import YouClicked from './YouClicked.js';
 import CharacterLimit from './CharacterLimit.js';
 import NumberGuessing from './NumberGuessing.js';
+import GithubProfile from './GithubProfile';
+import GithubSearch from './GithubSearch'
 import './App.css';
 
 var imageList = [
@@ -74,6 +76,12 @@ class App extends Component {
         
         <NumberGuessing>
         </NumberGuessing>
+        <hr/>
+        
+        <GithubProfile username="ssaquif"/>
+        <hr/>
+        
+        <GithubSearch/>
         <hr/>
       </div>
     );
