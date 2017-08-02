@@ -18,6 +18,7 @@ import Timer from "./Timer";
 import MyInput from "./MyInput";
 import GithubProfile from "./GithubProfile";
 import GithubSearch from "./GithubSearch";
+import GithubProfileZiad from "./GithubProfileZiad";
 
 var imageList = [ //unique keys are necessary for sorting and accessing specific indexes of the array instead of re-rendering the whole thing (saves bandwidth and processing power)
     {id: 42, source: "http://placekitten.com/g/210/210", text: "Hello kittenz!"},
@@ -135,6 +136,9 @@ class App extends Component {
                 <hr/>
                 <h2>Github Search</h2>
                 <GithubSearch/>
+                <hr/>
+                <h2>Github Profile Ziad</h2>
+                <GithubProfileZiad username="denysdovhan"/>
             </div>
         );
     }

@@ -11,17 +11,17 @@ class GithubProfile extends React.Component{
     }
 
     fetchData() {
-        var that = this;
+        // var that = this;
         fetch("https://api.github.com/users/" + this.props.username)
             .then(r => r.json())
             .then( ( function (responseJSON) {
                 this.setState({ //could also put that.setState
                    user : responseJSON
                 });
-            } ).bind(this) ); //could also do (function(){--}).bind(this) inside the then() block
+            } ).bind(this) ); //we are returning a function expression as a callback with the 'this' context changed
     }
 
-    componentDidUpdate(prevProps){ //This is necessary because even if the prop changes and it re-renders the fetchData method is not re-called
+    componentDidUpdate(prevProps){ //This is necessary because even if the prop changes and it re-renders (which happens when props OR state changes) the fetchData method is not re-called
         if (prevProps.username !== this.props.username){
             this.fetchData();
         }
