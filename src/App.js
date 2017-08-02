@@ -4,6 +4,9 @@ import ImageCaption from './ImageCaption.js';
 import RedBox from './RedBox.js';
 import Layout from './Layout.js';
 import GuessTheNumber from './GuessTheNumber.js';
+import YouClicked from './YouClicked.js';
+import CharacterLimit from './CharacterLimit.js';
+import NumberGuessing from './NumberGuessing.js';
 import './App.css';
 
 var imageList = [
@@ -61,6 +64,17 @@ class App extends Component {
         </GuessTheNumber> 
         <hr/>
         
+        <YouClicked>
+        </YouClicked>
+        <hr/>
+        
+        <CharacterLimit limit={140}>
+        </CharacterLimit>
+        <hr/>
+        
+        <NumberGuessing>
+        </NumberGuessing>
+        <hr/>
       </div>
     );
   }

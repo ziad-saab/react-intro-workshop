@@ -37,27 +37,3 @@ class GuessTheNumber extends React.Component {
 }
 
 export default GuessTheNumber;
-
-/*
-class TheForm extends React.Component {
-      fetchWeather(event) {
-        event.preventDefault();
-
-        render({isLoading: true});
-
-        fetch('http://api.open-notify.org/iss-now.json')
-        .then(r => r.json())
-        .then(data => {
-          render({isLoading: false, weather: data})
-        })
-      }
-      render() {
-
-        return (
-          <form className="weather-form" onSubmit={this.fetchWeather}>
-            <input type="text" name="city" />
-            <button type="submit">Check weather!</button>
-          </form>
-        );
-      }
-    }*/
